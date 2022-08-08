@@ -1,23 +1,24 @@
 const io = require("socket.io-client");
-const socket = io("https://mix-chat-1.herokuapp.com")
+ //const socket = io("https://mix-chat-1.herokuapp.com")
+const socket = io("http://127.0.0.1:3300")
 var uname, friend_name;
 console.log("welcome");
 socket.on("connect", () => {
    console.log(socket.id);
-   socket.emit("register", "tayyab");
+   socket.emit("register", "+923084244302");
   });
 
 function sendMessage(user,friend,message) {
-   
-    socket.emit('private_chat', {
+ 
+    socket.emit('send_file', {
         user: user,
         friend: friend,
-        message: message
+        filename: message
     });
 }
-sendMessage("tayyab","rana","i am tayyab");
+sendMessage("+923084244302","+923147593927","http://localhost:3300/images/myFile-1659984081139.jpg");
 
-socket.on('private_chat', function (msg) {
+socket.on('send_file', function (msg) {
    console.log(msg);
 });
 
